@@ -25,5 +25,15 @@ class Item{
         div.appendChild(botonEditar)
         div.appendChild(botonRemover)
         container.appendChild(div)
+        botonEditar.addEventListener("click", function(){
+            inputitem.disabled="false"
+            if(!inputitem.disabled){
+                botonEditar.innerText = "<i class='fas fa-lock-open'></i>"
+            }
+            else{
+                botonEditar.innerText= "<i class='fa-solid fa-lock'></i>"
+            }
+            
+        })
     }
 }
