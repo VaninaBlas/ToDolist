@@ -9,31 +9,46 @@ class Item{
     }
     crearDiv(valor){
         let inputitem=  document.createElement("input")
-        inputitem.disabled='true'
+        inputitem.disabled=true
         inputitem.type='text'
-        inputitem.classList.add("item-input")
-        inputitem.appendChild(valor)
-        let div= document.createElement("id")
+        inputitem.value=valor
+        let div= document.createElement("div")
+        inputitem.setAttribute("class", "item-input")
         div.classList.add("item")
         let botonEditar= document.createElement("button")
         botonEditar.innerHTML= "<i class='fa-solid fa-lock'></i>"
-        botonEditar.classList.add("boton-editar")
         let botonRemover= document.createElement("button")
+        botonRemover.setAttribute("class", "boton-remover")
+        botonEditar.setAttribute("class", "boton-editar")
         botonRemover.innerHTML="<i class='fa-solid fa-trash'></i>"
-        botonRemover.classList.add("boton-remover")
         div.appendChild(inputitem)
         div.appendChild(botonEditar)
         div.appendChild(botonRemover)
         container.appendChild(div)
         botonEditar.addEventListener("click", function(){
-            inputitem.disabled="false"
-            if(!inputitem.disabled){
-                botonEditar.innerText = "<i class='fas fa-lock-open'></i>"
+            
+            if(inputitem.disabled){
+                inputitem.disabled=false
+                botonEditar.innerHTML = '<i class="fas fa-lock-open"></i>'
             }
             else{
-                botonEditar.innerText= "<i class='fa-solid fa-lock'></i>"
+                inputitem.disabled=true
+
+                botonEditar.innerHTML= "<i class='fa-solid fa-lock'></i>"
             }
             
         })
+        botonRemover.addEventListener("click", function () {
+            container.removeChild(div);
+        });
     }
 }
+function chequearInput(){
+    if(input.value != ""){
+        let obj=new Item(input.value)
+        input.value=""                                                    
+    }
+}
+agregar.addEventListener("click", function(){
+    chequearInput()
+})
